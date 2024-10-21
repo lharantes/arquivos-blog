@@ -1,0 +1,17 @@
+- name: PROXMOX | Create a Linux Virtual Machine
+  hosts: proxmox
+  remote_user: root
+  roles: 
+    - role: create-vm-proxmox
+      vars:
+        proxmox_node: pve
+        api_user: root@pam
+        api_token_id: ansible
+        storage: vms-storage
+        api_token_secret: xxxxxxxxxxx
+
+- name: LINUX | Configure Linux server
+  hosts: vms
+  become: true
+  roles: 
+    - config-vm-linux
