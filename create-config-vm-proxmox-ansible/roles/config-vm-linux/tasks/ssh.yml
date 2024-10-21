@@ -1,0 +1,13 @@
+- name: SSH | Disable password authentication for root
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin prohibit-password'
+
+- name: SSH | Disable tunneled clear-text passwords
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regexp: '^PasswordAuthentication yes'
+    line: 'PasswordAuthentication no'

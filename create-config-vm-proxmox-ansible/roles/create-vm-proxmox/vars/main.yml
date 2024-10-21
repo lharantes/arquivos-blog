@@ -1,0 +1,7 @@
+---
+# vars file for create-vm-proxmox
+proxmox_node:
+api_token_id:
+api_user:
+storage:
+api_token_secret:

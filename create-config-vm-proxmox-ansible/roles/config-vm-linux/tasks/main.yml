@@ -1,0 +1,14 @@
+---
+# tasks file for config-vm-proxmox
+- name: LINUX | Config Motd banner
+  import_tasks: banner.yml
+
+- name: LINUX | Config SSH Server
+  import_tasks: ssh.yml
+  
+- name: LINUX | Install basic packages
+  import_tasks: update.yml
+
+- name: LINUX | Install basic packages
+  import_tasks: packages.yml
+

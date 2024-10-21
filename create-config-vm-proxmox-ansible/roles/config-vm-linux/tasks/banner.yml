@@ -1,0 +1,4 @@
+- name: Server | Copy MTOD to server
+  ansible.builtin.copy:
+    src: motd
+    dest: /etc/motd

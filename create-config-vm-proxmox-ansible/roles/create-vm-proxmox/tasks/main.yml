@@ -1,0 +1,7 @@
+---
+# tasks file for create-vm-proxmox
+- name: PROXMOX | Creating a Virtual Machine
+  import_tasks: create-vm.yml
+
+- name: PROXMOX | Send messagem on Telegram
+  import_tasks: notify_telegram.yml

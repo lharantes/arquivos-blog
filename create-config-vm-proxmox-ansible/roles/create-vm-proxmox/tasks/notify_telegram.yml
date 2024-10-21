@@ -1,0 +1,16 @@
+---
+- name: Telegram | Send message
+  community.general.telegram:
+    token: xxxxxx
+    api_args:
+      chat_id: -42xxxxxxxxxxx
+      parse_mode: plain
+      text: |
+        ### Your Server is READY!! ###
+        --------------------------------------
+
+        Server: "{{ vm_name }}"
+        IP ADDRESS: "192.168.1.{{ thevmid.stdout }}"
+        'URL': ssh://luiz@192.168.1.{{ thevmid.stdout }}
+        --------------------------------------   
+...

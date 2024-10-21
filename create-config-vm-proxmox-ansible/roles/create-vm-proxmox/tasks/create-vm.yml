@@ -1,0 +1,49 @@
+---
+- name: Creating the VM
+  become: true
+  become_user: root
+  proxmox_kvm:
+    api_user        : "{{ api_user }}"
+    api_token_id    : "{{ api_token_id }}"
+    api_token_secret: "{{ api_token_secret }}"
+    api_host        : "{{ ansible_default_ipv4.address }}" 
+    clone           : ubuntu-template
+    name            : "{{ vm_name }}"
+    node            : "{{ proxmox_node }}"
+    storage         : "{{ storage }}"
+    timeout         : 500
+
+- name: Wait for VM to be created
+  pause:
+    seconds: 10
+
+- name: Getting the VM ID
+  shell: qm list | grep "{{ vm_name }}" | awk '{ print $1 }'
+  register: thevmid
+
+- name: Setting the IP
+  shell: qm set "{{ thevmid.stdout }}" --ipconfig0 ip=192.168.1.{{ thevmid.stdout }}/24,gw=192.168.1.1
+  # Config the IP 192.168.1.x and gateway 192.168.1.1
+
+- name: Starting the VM "{{ vm_name }}"
+  proxmox_kvm:
+    api_user        : "{{ api_user }}"
+    api_token_id    : "{{ api_token_id }}"
+    api_token_secret: "{{ api_token_secret }}"
+    api_host        : "{{ ansible_default_ipv4.address }}"
+    name            : "{{ vm_name }}"
+    node            : "{{ proxmox_node }}"
+    state           : started
+
+- name: Print output to HOST file
+  ansible.builtin.lineinfile:
+    path: hosts
+    line: '{{ vm_name }} ansible_host=192.168.1.{{ thevmid.stdout }}'
+  delegate_to: localhost
+
+- name: refresh inventory
+  meta: refresh_inventory
+
+- name: Wait for VM to be started
+  pause:
+    seconds: 50

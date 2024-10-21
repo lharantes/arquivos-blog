@@ -1,0 +1,20 @@
+- name: Remove apt lock file
+  vars:
+    my_var: "{{lock_file}}"   
+  file:
+    path: "{{lock_file}}"
+    state: absent
+  with_items:
+    - "/var/lib/dpkg/lock"
+    - "/var/lib/dpkg/lock-frontend"
+  loop_control:
+    loop_var: lock_file
+  tags: apt
+
+- name: dpkg configure
+  command: dpkg --configure -a
+
+- name: APT | Installing Linux Apps
+  ansible.builtin.apt:
+    name: '{{ packages }}'
+    state: latest

@@ -1,0 +1,20 @@
+
+- name: APT | Upgrade dist
+  ansible.builtin.apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 #One day  
+
+- name: LINUX | Check if a reboot is required.
+  ansible.builtin.stat:
+    path: /var/run/reboot-required
+    get_checksum: no
+  register: reboot_required_file
+
+- name: LINUX | Reboot the server (if required).
+  ansible.builtin.reboot:
+  when: reboot_required_file.stat.exists == true
+
+- name: APT | Remove dependencies that are no longer required.
+  ansible.builtin.apt:
+    autoremove: yes

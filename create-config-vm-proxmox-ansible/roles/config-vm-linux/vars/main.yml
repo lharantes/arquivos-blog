@@ -1,0 +1,10 @@
+---
+# vars file for config-vm-proxmox
+packages:
+  - vim
+  - curl
+  - wget
+  - apt-transport-https
+  - ca-certificates
+  - git
+  - unzip
