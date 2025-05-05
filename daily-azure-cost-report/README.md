@@ -14,8 +14,6 @@ Eu tenho o hábito de toda manhã ler os meus e-mails e recebendo o relatório d
 
 ## Script com créditos
 
-Eu tenho assinaturas com créditos cedidos pela microsoft e o intuito é ir acompanhando esses gastos,  o e-mail que recebo com o relatório é o da imagem abaixo:
+Eu tenho assinaturas com créditos cedidos pela microsoft e o intuito é ir acompanhando esses gastos,  o e-mail que recebo com o relatório é o da imagem abaixo e para esse cenário use o script `daily-repor-no-credit.ps1`:
 
-![daily-azure-cost-report](https://arantes.net.br/assets/img/36/01.png){: .shadow .rounded-10}
-
-Para esse cenário use o script `daily-repor-no-credit.ps1`
+![daily-azure-cost-report](https://arantes.net.br/assets/img/36/01.png)
